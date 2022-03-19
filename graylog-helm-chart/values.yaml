@@ -1,0 +1,16 @@
+graylog:
+  tags:
+    install-elasticsearch: false
+    install-mongodb: false
+  graylog:
+    rootUsername: "Admin"
+    rootEmail: "wassalni.tech@gmail.com"
+    existingRootSecret: root-secret
+    elasticsearch:
+      hosts:
+        - elastic.database:9200
+      uriSecretKey: uri
+      uriSecretName: graylog-elastic-secret
+    mongodb:
+      uriSecretName: graylog-mongo-secret
+      uriSecretKey: uri
