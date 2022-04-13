@@ -3,6 +3,7 @@ graylog:
     install-elasticsearch: false
     install-mongodb: false
   graylog:
+    rootTimezone: "UTC+1"
     image:
       tag: "4.2.5"
     input:
