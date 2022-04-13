@@ -3,6 +3,13 @@ graylog:
     install-elasticsearch: false
     install-mongodb: false
   graylog:
+    input:
+      udp:
+        service:
+          type: ClusterIP
+        ports:
+          - name: syslog
+            port: 1514
     rootUsername: "Admin"
     rootEmail: "wassalni.tech@gmail.com"
     existingRootSecret: root-secret
