@@ -3,6 +3,8 @@ graylog:
     install-elasticsearch: false
     install-mongodb: false
   graylog:
+    image:
+      tag: "4.2.5"
     input:
       udp:
         service:
