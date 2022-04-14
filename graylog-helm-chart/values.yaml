@@ -9,7 +9,8 @@ graylog:
     input:
       udp:
         service:
-          type: ClusterIP
+          type: NodePort
+          nodePort: 30007
         ports:
           - name: syslog
             port: 1514
