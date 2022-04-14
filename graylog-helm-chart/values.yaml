@@ -3,17 +3,18 @@ graylog:
     install-elasticsearch: false
     install-mongodb: false
   graylog:
-    rootTimezone: "UTC+1"
+    persistence:
+      storageClass: "openebs-hostpath"
     image:
       tag: "4.2.5"
     input:
-      udp:
+      tcp:
         service:
           type: NodePort
-          nodePort: 30007
         ports:
           - name: syslog
             port: 1514
+            nodePort: 30007
     rootUsername: "Admin"
     rootEmail: "wassalni.tech@gmail.com"
     existingRootSecret: root-secret
