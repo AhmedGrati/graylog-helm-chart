@@ -3,6 +3,9 @@ graylog:
     install-elasticsearch: false
     install-mongodb: false
   graylog:
+    service:
+      type: NodePort
+      nodePort: 30008
     persistence:
       storageClass: "openebs-hostpath"
     image:
