@@ -24,7 +24,7 @@ graylog:
         ports:
           - name: syslog
             port: 1514
-            nodePort: 30008
+            nodePort: 30006
     rootUsername: "Admin"
     rootEmail: "wassalni.tech@gmail.com"
     existingRootSecret: root-secret
