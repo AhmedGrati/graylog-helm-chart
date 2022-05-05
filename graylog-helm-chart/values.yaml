@@ -11,13 +11,20 @@ graylog:
     image:
       tag: "4.2.5"
     input:
-      tcp:
+      udp:
         service:
           type: NodePort
         ports:
           - name: syslog
             port: 1514
             nodePort: 30007
+      tcp:
+        service:
+          type: NodePort
+        ports:
+          - name: syslog
+            port: 1514
+            nodePort: 30008
     rootUsername: "Admin"
     rootEmail: "wassalni.tech@gmail.com"
     existingRootSecret: root-secret

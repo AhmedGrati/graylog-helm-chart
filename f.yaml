@@ -1,0 +1,1912 @@
+NAME: graylog
+LAST DEPLOYED: Mon Apr 18 11:13:52 2022
+NAMESPACE: test
+STATUS: pending-install
+REVISION: 1
+USER-SUPPLIED VALUES:
+graylog:
+  tags:
+    install-elasticsearch: false
+    install-mongodb: false
+
+COMPUTED VALUES:
+graylog:
+  elasticsearch:
+    antiAffinity: soft
+    antiAffinityTopologyKey: kubernetes.io/hostname
+    clusterDeprecationIndexing: "false"
+    clusterHealthCheckParams: wait_for_status=green&timeout=1s
+    clusterName: elasticsearch
+    enableServiceLinks: true
+    envFrom: []
+    esConfig: {}
+    esJavaOpts: -Xmx128m -Xms128m
+    esMajorVersion: ""
+    extraContainers: []
+    extraEnvs: []
+    extraInitContainers: []
+    extraVolumeMounts: []
+    extraVolumes: []
+    fsGroup: ""
+    fullnameOverride: ""
+    global: {}
+    healthNameOverride: ""
+    hostAliases: []
+    httpPort: 9200
+    image: docker.elastic.co/elasticsearch/elasticsearch
+    imagePullPolicy: IfNotPresent
+    imagePullSecrets: []
+    imageTag: 7.16.2
+    ingress:
+      annotations: {}
+      className: nginx
+      enabled: false
+      hosts:
+      - host: chart-example.local
+        paths:
+        - path: /
+      pathtype: ImplementationSpecific
+      tls: []
+    initResources: {}
+    keystore: []
+    labels: {}
+    lifecycle: {}
+    masterService: ""
+    maxUnavailable: 1
+    minimumMasterNodes: 1
+    nameOverride: ""
+    networkHost: 0.0.0.0
+    networkPolicy:
+      http:
+        enabled: false
+      transport:
+        enabled: false
+    nodeAffinity: {}
+    nodeGroup: master
+    nodeSelector: {}
+    persistence:
+      annotations: {}
+      enabled: true
+      labels:
+        enabled: false
+    podAnnotations: {}
+    podManagementPolicy: Parallel
+    podSecurityContext:
+      fsGroup: 1000
+      runAsUser: 1000
+    podSecurityPolicy:
+      create: false
+      name: ""
+      spec:
+        fsGroup:
+          rule: RunAsAny
+        privileged: true
+        runAsUser:
+          rule: RunAsAny
+        seLinux:
+          rule: RunAsAny
+        supplementalGroups:
+          rule: RunAsAny
+        volumes:
+        - secret
+        - configMap
+        - persistentVolumeClaim
+        - emptyDir
+    priorityClassName: ""
+    protocol: http
+    rbac:
+      automountToken: true
+      create: false
+      serviceAccountAnnotations: {}
+      serviceAccountName: ""
+    readinessProbe:
+      failureThreshold: 3
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 3
+      timeoutSeconds: 5
+    replicas: 1
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 512M
+      requests:
+        cpu: 100m
+        memory: 512M
+    roles:
+      data: "true"
+      ingest: "true"
+      master: "true"
+      ml: "true"
+      remote_cluster_client: "true"
+    schedulerName: ""
+    secretMounts: []
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+      runAsNonRoot: true
+      runAsUser: 1000
+    service:
+      annotations: {}
+      enabled: true
+      externalTrafficPolicy: ""
+      httpPortName: http
+      labels: {}
+      labelsHeadless: {}
+      loadBalancerIP: ""
+      loadBalancerSourceRanges: []
+      nodePort: ""
+      transportPortName: transport
+      type: ClusterIP
+    sysctlInitContainer:
+      enabled: true
+    sysctlVmMaxMapCount: 262144
+    terminationGracePeriod: 120
+    tests:
+      enabled: true
+    tolerations: []
+    transportPort: 9300
+    updateStrategy: RollingUpdate
+    volumeClaimTemplate:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 8Gi
+  global: {}
+  graylog:
+    affinity: {}
+    customLabels: {}
+    elasticsearch:
+      hosts:
+      - elastic.database:9200
+      uriSSL: false
+      uriSecretKey: uri
+      uriSecretName: graylog-elastic-secret
+      version: "7"
+    env: {}
+    envRaw: {}
+    existingRootSecret: root-secret
+    externalUri: ""
+    extraInitContainers: []
+    extraVolumeMounts: []
+    extraVolumes: []
+    geoip:
+      enabled: false
+      mmdbUri: ""
+    image:
+      pullPolicy: IfNotPresent
+      repository: graylog/graylog
+      tag: 4.2.5
+    ingress:
+      annotations: {}
+      enabled: false
+      extraPaths: []
+      hosts: []
+      ingressClassName: ""
+      labels: {}
+      path: /
+      pathType: Prefix
+      tls: []
+    init:
+      env: {}
+      image:
+        pullPolicy: IfNotPresent
+        repository: alpine
+      kubectlLocation: ""
+      resources: {}
+    input:
+      tcp:
+        ports:
+        - name: syslog
+          nodePort: 30014
+          port: 1514
+        service:
+          type: NodePort
+    javaOpts: -Dlog4j2.formatMsgNoLookups=true -Djdk.tls.acknowledgeCloseNotify=true
+      -XX:+UnlockExperimentalVMOptions -XX:NewRatio=1 -XX:MaxMetaspaceSize=256m -server
+      -XX:+ResizeTLAB -XX:-OmitStackTraceInFastThrow
+    journal:
+      deleteBeforeStart: false
+      maxSize: 5gb
+    livenessProbe:
+      failureThreshold: 3
+      initialDelaySeconds: 0
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 5
+    logInJson: false
+    metrics:
+      enabled: false
+    mongodb:
+      maxConnections: 1000
+      uri: ""
+      uriSecretKey: uri
+      uriSecretName: graylog-mongo-secret
+    nodeSelector: {}
+    options:
+      allowHighlighting: false
+      allowLeadingWildcardSearches: false
+    persistence:
+      accessMode: ReadWriteOnce
+      enabled: true
+      size: 20Gi
+      storageClass: openebs-hostpath
+    plugins:
+      locations: []
+      proxy:
+        enabled: false
+        host: http://your.proxy.host:8080
+    podAnnotations: {}
+    podSecurityContext: {}
+    provisioner:
+      annotations: {}
+      enabled: false
+      env: {}
+      envRaw: {}
+      useGraylogServiceAccount: false
+    readinessProbe:
+      failureThreshold: 3
+      initialDelaySeconds: 0
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    replicas: 1
+    resources:
+      limits:
+        cpu: "1"
+      requests:
+        cpu: 500m
+        memory: 1024Mi
+    rootEmail: wassalni.tech@gmail.com
+    rootTimezone: UTC
+    rootUsername: Admin
+    secret:
+      annotations: {}
+    securityContext:
+      privileged: false
+    serverFiles: {}
+    service:
+      headless:
+        suffix: ""
+      master:
+        annotations: {}
+        enabled: true
+        port: 9000
+        type: ClusterIP
+      nodePort: 30012
+      port: 9000
+      ports: []
+      type: NodePort
+    sidecarContainers: []
+    startupProbe:
+      failureThreshold: 3
+      periodSeconds: 60
+      successThreshold: 1
+      timeoutSeconds: 5
+    terminationGracePeriodSeconds: 120
+    tls:
+      certFile: /etc/graylog/server/server.cert
+      enabled: false
+      keyFile: /etc/graylog/server/server.key
+    tolerations: []
+    transportEmail:
+      authPassword: ""
+      authUsername: ""
+      enabled: false
+      fromEmail: ""
+      hostname: ""
+      port: 2587
+      subjectPrefix: '[graylog]'
+      useAuth: true
+      useSsl: false
+      useTls: true
+    updateStrategy: RollingUpdate
+  imagePullSecrets: []
+  mongodb:
+    affinity: {}
+    annotations: {}
+    arbiter:
+      affinity: {}
+      annotations: {}
+      args: []
+      command: []
+      configuration: ""
+      containerSecurityContext:
+        enabled: true
+        runAsUser: 1001
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      enabled: true
+      existingConfigmap: ""
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraFlags: []
+      extraVolumeMounts: []
+      extraVolumes: []
+      hostAliases: []
+      initContainers: []
+      labels: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 6
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 5
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      pdb:
+        create: false
+        maxUnavailable: ""
+        minAvailable: 1
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podSecurityContext:
+        enabled: true
+        fsGroup: 1001
+        sysctls: []
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 6
+        initialDelaySeconds: 5
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 5
+      resources:
+        limits: {}
+        requests: {}
+      runtimeClassName: ""
+      service:
+        nameOverride: ""
+      sidecars: []
+      tolerations: []
+    architecture: replicaset
+    args: []
+    auth:
+      database: ""
+      databases: []
+      enabled: false
+      existingSecret: ""
+      password: ""
+      passwords: []
+      replicaSetKey: ""
+      rootPassword: ""
+      rootUser: root
+      username: ""
+      usernames: []
+    clusterDomain: cluster.local
+    command: []
+    common:
+      exampleValue: common-chart
+      global:
+        imagePullSecrets: []
+        imageRegistry: ""
+        namespaceOverride: ""
+        storageClass: ""
+    commonAnnotations: {}
+    commonLabels: {}
+    configuration: ""
+    containerSecurityContext:
+      enabled: true
+      runAsNonRoot: true
+      runAsUser: 1001
+    customLivenessProbe: {}
+    customReadinessProbe: {}
+    customStartupProbe: {}
+    diagnosticMode:
+      args:
+      - infinity
+      command:
+      - sleep
+      enabled: false
+    directoryPerDB: false
+    disableJavascript: false
+    disableSystemLog: false
+    enableIPv6: false
+    enableJournal: true
+    existingConfigmap: ""
+    externalAccess:
+      autoDiscovery:
+        enabled: false
+        image:
+          pullPolicy: IfNotPresent
+          pullSecrets: []
+          registry: docker.io
+          repository: bitnami/kubectl
+          tag: 1.23.1-debian-10-r19
+        resources:
+          limits: {}
+          requests: {}
+      enabled: false
+      hidden:
+        enabled: false
+        service:
+          annotations: {}
+          domain: ""
+          loadBalancerIPs: []
+          loadBalancerSourceRanges: []
+          nodePorts: []
+          port: 27017
+          type: LoadBalancer
+      service:
+        annotations: {}
+        domain: ""
+        loadBalancerIPs: []
+        loadBalancerSourceRanges: []
+        nodePorts: []
+        port: 27017
+        type: LoadBalancer
+    extraDeploy: []
+    extraEnvVars: []
+    extraEnvVarsCM: ""
+    extraEnvVarsSecret: ""
+    extraFlags: []
+    extraVolumeMounts: []
+    extraVolumes: []
+    fullnameOverride: ""
+    global:
+      imagePullSecrets: []
+      imageRegistry: ""
+      namespaceOverride: ""
+      storageClass: ""
+    hidden:
+      affinity: {}
+      annotations: {}
+      args: []
+      command: []
+      configuration: ""
+      customLivenessProbe: {}
+      customReadinessProbe: {}
+      enabled: false
+      existingConfigmap: ""
+      extraEnvVars: []
+      extraEnvVarsCM: ""
+      extraEnvVarsSecret: ""
+      extraFlags: []
+      extraVolumeMounts: []
+      extraVolumes: []
+      initContainers: []
+      labels: {}
+      livenessProbe:
+        enabled: true
+        failureThreshold: 6
+        initialDelaySeconds: 30
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 5
+      nodeAffinityPreset:
+        key: ""
+        type: ""
+        values: []
+      nodeSelector: {}
+      pdb:
+        create: false
+        maxUnavailable: ""
+        minAvailable: 1
+      persistence:
+        accessModes:
+        - ReadWriteOnce
+        annotations: {}
+        enabled: true
+        medium: ""
+        mountPath: /bitnami/mongodb
+        size: 8Gi
+        storageClass: ""
+        subPath: ""
+        volumeClaimTemplates:
+          dataSource: {}
+          selector: {}
+      podAffinityPreset: ""
+      podAnnotations: {}
+      podAntiAffinityPreset: soft
+      podLabels: {}
+      podManagementPolicy: OrderedReady
+      priorityClassName: ""
+      readinessProbe:
+        enabled: true
+        failureThreshold: 6
+        initialDelaySeconds: 5
+        periodSeconds: 10
+        successThreshold: 1
+        timeoutSeconds: 5
+      replicaCount: 1
+      resources:
+        limits: {}
+        requests: {}
+      runtimeClassName: ""
+      sidecars: []
+      strategyType: RollingUpdate
+      tolerations: []
+    hostAliases: []
+    image:
+      debug: false
+      pullPolicy: IfNotPresent
+      pullSecrets: []
+      registry: docker.io
+      repository: bitnami/mongodb
+      tag: 4.4.11-debian-10-r7
+    initContainers: []
+    initdbScripts: {}
+    initdbScriptsConfigMap: ""
+    labels: {}
+    livenessProbe:
+      enabled: true
+      failureThreshold: 6
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    metrics:
+      containerPort: 9216
+      enabled: false
+      extraFlags: ""
+      extraUri: ""
+      image:
+        pullPolicy: IfNotPresent
+        pullSecrets: []
+        registry: docker.io
+        repository: bitnami/mongodb-exporter
+        tag: 0.11.2-debian-10-r389
+      livenessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 15
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 5
+      password: ""
+      prometheusRule:
+        additionalLabels: {}
+        enabled: false
+        namespace: ""
+        rules: {}
+      readinessProbe:
+        enabled: true
+        failureThreshold: 3
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        successThreshold: 1
+        timeoutSeconds: 1
+      resources:
+        limits: {}
+        requests: {}
+      service:
+        annotations:
+          prometheus.io/path: /metrics
+          prometheus.io/port: '{{ .Values.metrics.service.port }}'
+          prometheus.io/scrape: "true"
+        port: 9216
+        type: ClusterIP
+      serviceMonitor:
+        additionalLabels: {}
+        enabled: false
+        interval: 30s
+        metricRelabelings: []
+        namespace: ""
+        relabellings: []
+        scrapeTimeout: ""
+      username: ""
+    nameOverride: ""
+    nodeAffinityPreset:
+      key: ""
+      type: ""
+      values: []
+    nodeSelector: {}
+    pdb:
+      create: false
+      maxUnavailable: ""
+      minAvailable: 1
+    persistence:
+      accessModes:
+      - ReadWriteOnce
+      annotations: {}
+      enabled: true
+      existingClaim: ""
+      medium: ""
+      mountPath: /bitnami/mongodb
+      size: 8Gi
+      storageClass: ""
+      subPath: ""
+      volumeClaimTemplates:
+        dataSource: {}
+        requests: {}
+        selector: {}
+    podAffinityPreset: ""
+    podAnnotations: {}
+    podAntiAffinityPreset: soft
+    podLabels: {}
+    podManagementPolicy: OrderedReady
+    podSecurityContext:
+      enabled: true
+      fsGroup: 1001
+      sysctls: []
+    podSecurityPolicy:
+      allowPrivilegeEscalation: false
+      create: false
+      privileged: false
+      spec: {}
+    priorityClassName: ""
+    rbac:
+      create: false
+      role:
+        rules: []
+    readinessProbe:
+      enabled: true
+      failureThreshold: 6
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    replicaCount: 1
+    replicaSetConfigurationSettings:
+      configuration: {}
+      enabled: false
+    replicaSetHostnames: true
+    replicaSetName: rs0
+    resources:
+      limits: {}
+      requests: {}
+    runtimeClassName: ""
+    schedulerName: ""
+    service:
+      annotations: {}
+      clusterIP: ""
+      externalIPs: []
+      loadBalancerIP: ""
+      loadBalancerSourceRanges: []
+      nameOverride: ""
+      nodePort: ""
+      port: 27017
+      portName: mongodb
+      type: ClusterIP
+    serviceAccount:
+      annotations: {}
+      create: true
+      name: ""
+    sidecars: []
+    startupProbe:
+      enabled: false
+      failureThreshold: 30
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    strategyType: RollingUpdate
+    systemLogVerbosity: 0
+    tls:
+      autoGenerated: true
+      caCert: ""
+      caKey: ""
+      enabled: false
+      existingSecret: ""
+      extraDnsNames: []
+      image:
+        pullPolicy: IfNotPresent
+        registry: docker.io
+        repository: bitnami/nginx
+        tag: 1.21.5-debian-10-r8
+      mode: requireTLS
+    tolerations: []
+    topologySpreadConstraints: []
+    useStatefulSet: true
+    volumePermissions:
+      enabled: false
+      image:
+        pullPolicy: IfNotPresent
+        pullSecrets: []
+        registry: docker.io
+        repository: bitnami/bitnami-shell
+        tag: 10-debian-10-r300
+      resources:
+        limits: {}
+        requests: {}
+      securityContext:
+        runAsUser: 0
+  rbac:
+    create: true
+    resources:
+    - pods
+    - secrets
+  serviceAccount:
+    annotations: {}
+    create: true
+  tags:
+    install-elasticsearch: false
+    install-mongodb: false
+
+HOOKS:
+---
+# Source: graylog-helm-chart/charts/graylog/charts/elasticsearch/templates/test/test-elasticsearch-health.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "graylog-pqjkt-test"
+  annotations:
+    "helm.sh/hook": test
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  securityContext:
+    fsGroup: 1000
+    runAsUser: 1000
+  containers:
+  - name: "graylog-atifr-test"
+    image: "docker.elastic.co/elasticsearch/elasticsearch:7.16.2"
+    imagePullPolicy: "IfNotPresent"
+    command:
+      - "sh"
+      - "-c"
+      - |
+        #!/usr/bin/env bash -e
+        curl -XGET --fail 'elasticsearch-master:9200/_cluster/health?wait_for_status=green&timeout=1s'
+  restartPolicy: Never
+MANIFEST:
+---
+# Source: graylog-helm-chart/charts/graylog/charts/elasticsearch/templates/poddisruptionbudget.yaml
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: "elasticsearch-master-pdb"
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: "elasticsearch-master"
+---
+# Source: graylog-helm-chart/charts/graylog/charts/mongodb/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: graylog-mongodb
+  namespace: test
+  labels:
+    app.kubernetes.io/name: mongodb
+    helm.sh/chart: mongodb-10.31.2
+    app.kubernetes.io/instance: graylog
+    app.kubernetes.io/managed-by: Helm
+secrets:
+  - name: graylog-mongodb
+---
+# Source: graylog-helm-chart/charts/graylog/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: graylog
+  labels:
+    helm.sh/chart: graylog-2.1.1
+    app.kubernetes.io/name: graylog
+    app.kubernetes.io/instance: "graylog"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/version: "4.2.7"
+---
+# Source: graylog-helm-chart/templates/graylog-elastic-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: graylog-elastic-secret
+data:
+  uri: aHR0cDovL2VsYXN0aWM6RWxhc3RpYzJQYXNzd29yZEBlbGFzdGljLmRhdGFiYXNlOjkyMDA=
+---
+# Source: graylog-helm-chart/templates/graylog-mongo-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: graylog-mongo-secret
+data:
+  uri: bW9uZ29kYjovL2dyYXlsb2c6TW9uZ29EQjJQYXNzd29yZEBtb25nb2RiLmRhdGFiYXNlOjI3MDE3L2dyYXlsb2c/YXV0aFNvdXJjZT1ncmF5bG9n
+---
+# Source: graylog-helm-chart/templates/graylog-root-secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: root-secret
+data:
+  graylog-password-secret: R3JheUxvZzJNb25pdG9yaW5n
+  graylog-password-sha2: MDJmNjgxODIwZjI1M2U1MWQ2OTA2MmZjMzRjMmQ5M2RiZjQ3ZmYwNzkzYzI3NjcxYWE4ZGQ3MTQ5ZTY2NGI2Yg==
+---
+# Source: graylog-helm-chart/charts/graylog/charts/mongodb/templates/replicaset/scripts-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: graylog-mongodb-scripts
+  namespace: test
+  labels:
+    app.kubernetes.io/name: mongodb
+    helm.sh/chart: mongodb-10.31.2
+    app.kubernetes.io/instance: graylog
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: mongodb
+data:
+  setup.sh: |-
+    #!/bin/bash
+
+    . /opt/bitnami/scripts/mongodb-env.sh
+
+    echo "Advertised Hostname: $MONGODB_ADVERTISED_HOSTNAME"
+    echo "Advertised Port: $MONGODB_ADVERTISED_PORT_NUMBER"
+
+    if [[ "$MY_POD_NAME" = "graylog-mongodb-0" ]]; then
+        echo "Pod name matches initial primary pod name, configuring node as a primary"
+        export MONGODB_REPLICA_SET_MODE="primary"
+    else
+        echo "Pod name doesn't match initial primary pod name, configuring node as a secondary"
+        export MONGODB_REPLICA_SET_MODE="secondary"
+        export MONGODB_INITIAL_PRIMARY_ROOT_USER="$MONGODB_ROOT_USER"
+        export MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD="$MONGODB_ROOT_PASSWORD"
+        export MONGODB_INITIAL_PRIMARY_PORT_NUMBER="$MONGODB_PORT_NUMBER"
+        export MONGODB_ROOT_PASSWORD=""
+        export MONGODB_EXTRA_USERNAMES=""
+        export MONGODB_EXTRA_DATABASES=""
+        export MONGODB_EXTRA_PASSWORDS=""
+        export MONGODB_ROOT_PASSWORD_FILE=""
+        export MONGODB_EXTRA_USERNAMES_FILE=""
+        export MONGODB_EXTRA_DATABASES_FILE=""
+        export MONGODB_EXTRA_PASSWORDS_FILE=""
+    fi
+
+    exec /opt/bitnami/scripts/mongodb/entrypoint.sh /opt/bitnami/scripts/mongodb/run.sh
+  setup-hidden.sh: |-
+    #!/bin/bash
+
+    . /opt/bitnami/scripts/mongodb-env.sh
+
+    echo "Advertised Hostname: $MONGODB_ADVERTISED_HOSTNAME"
+    echo "Advertised Port: $MONGODB_ADVERTISED_PORT_NUMBER"
+    echo "Configuring node as a hidden node"
+    export MONGODB_REPLICA_SET_MODE="hidden"
+    export MONGODB_INITIAL_PRIMARY_ROOT_USER="$MONGODB_ROOT_USER"
+    export MONGODB_INITIAL_PRIMARY_ROOT_PASSWORD="$MONGODB_ROOT_PASSWORD"
+    export MONGODB_INITIAL_PRIMARY_PORT_NUMBER="$MONGODB_PORT_NUMBER"
+    export MONGODB_ROOT_PASSWORD=""
+    export MONGODB_EXTRA_USERNAMES=""
+    export MONGODB_EXTRA_DATABASES=""
+    export MONGODB_EXTRA_PASSWORDS=""
+    export MONGODB_ROOT_PASSWORD_FILE=""
+    export MONGODB_EXTRA_USERNAMES_FILE=""
+    export MONGODB_EXTRA_DATABASES_FILE=""
+    export MONGODB_EXTRA_PASSWORDS_FILE=""
+    exec /opt/bitnami/scripts/mongodb/entrypoint.sh /opt/bitnami/scripts/mongodb/run.sh
+---
+# Source: graylog-helm-chart/charts/graylog/templates/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: graylog
+  labels:
+    helm.sh/chart: graylog-2.1.1
+    app.kubernetes.io/name: graylog
+    app.kubernetes.io/instance: "graylog"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/version: "4.2.7"
+data:
+  log4j2.xml: |-
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Configuration packages="org.graylog2.log4j" shutdownHook="disable">
+        <Appenders>
+            <Console name="STDOUT" target="SYSTEM_OUT">
+                <PatternLayout pattern="%d %-7level [%c{1}] - %m - %X%n"/>
+            </Console>
+            <RollingFile name="rolling-file" fileName="/usr/share/graylog/log/server.log" filePattern="/usr/share/graylog/log/server.log.%i.gz">
+                <PatternLayout>
+                    <Pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5p [%c{1}] %m%n</Pattern>
+                </PatternLayout>
+                <Policies>
+                    <SizeBasedTriggeringPolicy size="50MB"/>
+                </Policies>
+                <DefaultRolloverStrategy max="10" fileIndex="min"/>
+            </RollingFile>
+            <!-- Internal Graylog log appender. Please do not disable. This makes internal log messages available via REST calls. -->
+            <Memory name="graylog-internal-logs" bufferSize="500"/>
+            <!-- Rotate audit logs daily -->
+            <RollingFile name="AUDITLOG" fileName="/usr/share/graylog/log/audit.log" filePattern="/usr/share/graylog/log/audit-%d{yyyy-MM-dd}.log.gz">
+                <PatternLayout>
+                    <Pattern>%d [%c{1}] - %m - %X%n</Pattern>
+                </PatternLayout>
+                <Policies>
+                    <TimeBasedTriggeringPolicy />
+                </Policies>
+            </RollingFile>
+        </Appenders>
+        <Loggers>
+            <!-- Application Loggers -->
+            <Logger name="org.graylog2" level="warn"/>
+            <Logger name="com.github.joschi.jadconfig" level="warn"/>
+            <!-- This emits a harmless warning for ActiveDirectory every time which we can't work around :( -->
+            <Logger name="org.apache.directory.api.ldap.model.message.BindRequestImpl" level="error"/>
+            <!-- Prevent DEBUG message about Lucene Expressions not found. -->
+            <Logger name="org.elasticsearch.script" level="warn"/>
+            <!-- Disable messages from the version check -->
+            <Logger name="org.graylog2.periodical.VersionCheckThread" level="off"/>
+            <!-- Suppress crazy byte array dump of Drools -->
+            <Logger name="org.drools.compiler.kie.builder.impl.KieRepositoryImpl" level="warn"/>
+            <!-- Silence chatty natty -->
+            <Logger name="com.joestelmach.natty.Parser" level="warn"/>
+            <!-- Silence Kafka log chatter -->
+            <Logger name="kafka.log.Log" level="warn"/>
+            <Logger name="kafka.log.OffsetIndex" level="warn"/>
+            <!-- Silence useless session validation messages -->
+            <Logger name="org.apache.shiro.session.mgt.AbstractValidatingSessionManager" level="warn"/>
+            <Root level="warn">
+                <AppenderRef ref="STDOUT"/>
+            </Root>
+            <!-- Security Loggers -->
+          <Logger name="org.graylog2.security.realm.PasswordAuthenticator" level="trace" additivity="false">
+                <AppenderRef ref="AUDITLOG"/>
+            </Logger>
+            <Logger name="org.graylog2.security.realm.AccessTokenAuthenticator" level="trace" additivity="false">
+                <AppenderRef ref="AUDITLOG"/>
+            </Logger>
+            <Logger name="org.graylog2.security.realm.RootAccountRealm" level="trace" additivity="false">
+                <AppenderRef ref="AUDITLOG"/>
+            </Logger>
+            <Logger name="org.graylog2.shared.security.ShiroAuthorizationFilter" level="trace" additivity="false">
+                <AppenderRef ref="AUDITLOG"/>
+            </Logger>
+        </Loggers>
+    </Configuration>
+  graylog.conf: |-
+    node_id_file = /usr/share/graylog/data/journal/node-id
+    root_username = Admin
+    root_email = wassalni.tech@gmail.com
+    root_timezone = UTC
+  
+    http_bind_address = 0.0.0.0:9000
+    elasticsearch_hosts = http://${GRAYLOG_ELASTICSEARCH_HOSTS}
+    allow_leading_wildcard_searches = false
+    allow_highlighting = false
+    output_batch_size = 500
+    output_flush_interval = 1
+    output_fault_count_threshold = 5
+    output_fault_penalty_seconds = 30
+    processbuffer_processors = 5
+    outputbuffer_processors = 3
+    processor_wait_strategy = blocking
+    ring_size = 65536
+    inputbuffer_ring_size = 65536
+    inputbuffer_processors = 2
+    inputbuffer_wait_strategy = blocking
+    message_journal_enabled = true
+    # Do not change `message_journal_dir` location
+    message_journal_dir = /usr/share/graylog/data/journal
+    message_journal_max_size = 5gb
+    lb_recognition_period_seconds = 3
+    # Use a replica set instead of a single host
+    mongodb_uri = ${GRAYLOG_MONGODB_URI}
+    mongodb_max_connections = 1000
+    mongodb_threads_allowed_to_block_multiplier = 5
+    # Email transport
+    transport_email_enabled = false
+    transport_email_hostname = 
+    transport_email_port = 2587
+    transport_email_use_auth = true
+    transport_email_use_tls = true
+    transport_email_use_ssl = false
+    transport_email_auth_username = 
+    transport_email_auth_password = 
+    transport_email_subject_prefix = [graylog]
+    transport_email_from_email = 
+    content_packs_dir = /usr/share/graylog/data/contentpacks
+    content_packs_auto_load = grok-patterns.json
+    proxied_requests_thread_pool_size = 32
+  entrypoint.sh: |-
+    #!/usr/bin/env bash
+
+    GRAYLOG_HOME=/usr/share/graylog
+    export GRAYLOG_PLUGIN_DIR=${GRAYLOG_HOME}/plugin
+    # Graylog 4.0.2 images move plugin dir to `plugins-default`
+    find ${GRAYLOG_HOME}/plugins-default/ -type f -exec cp {} ${GRAYLOG_PLUGIN_DIR} \;
+    # Looking for Master IP
+    retry=1
+    for i in {0..2}
+    do
+      MASTER_IP=`/k8s/kubectl --namespace test get pod -o jsonpath='{range .items[*]}{.metadata.name} {.status.podIP}{"\n"}{end}' -l graylog-role=master --field-selector=status.phase=Running|awk '{print $2}'`
+      SELF_IP=`/k8s/kubectl --namespace test get pod $HOSTNAME -o jsonpath='{.status.podIP}'`
+      echo "Current master is $MASTER_IP"
+      echo "Self IP is $SELF_IP"
+      retry=$((retry+1))
+      [[ ! -z "$MASTER_IP" ]] && break
+      echo "[Try ${retry}/3] Waiting for master node..."
+      sleep 2
+    done
+    if [[ -z "$MASTER_IP" ]]; then
+      echo "Launching $HOSTNAME as master"
+      export GRAYLOG_IS_MASTER="true"
+      /k8s/kubectl --namespace test label --overwrite pod $HOSTNAME graylog-role="master"
+    else
+      # When container was recreated or restart, MASTER_IP == SELF_IP, running as master and no need to change label graylog-role="master"
+      if [ "$SELF_IP" == "$MASTER_IP" ];then
+        echo "Launching $HOSTNAME as master"
+        export GRAYLOG_IS_MASTER="true"
+      else
+        # MASTER_IP != SELF_IP, running as coordinating
+        echo "Launching $HOSTNAME as coordinating"
+        export GRAYLOG_IS_MASTER="false"
+        /k8s/kubectl --namespace test label --overwrite pod $HOSTNAME graylog-role="coordinating"
+      fi
+    fi
+    # Download plugins
+    # Start Graylog
+    echo "Starting graylog"
+    # Original docker-entrypoint.sh in Graylog Docker will error while executing since you can't chown readonly files in `config`
+    # exec /docker-entrypoint.sh graylog
+    # Interpolate
+    sed 's/"/\\\"/g;s/.*/echo "&"/e' ${GRAYLOG_HOME}/config/graylog.conf > ${GRAYLOG_HOME}/graylog.conf.subst
+    export GRAYLOG_ELASTICSEARCH_VERSION=7
+    echo "Graylog Home ${GRAYLOG_HOME}"
+    echo "Graylog Plugin Dir ${GRAYLOG_PLUGIN_DIR}"
+    echo "Graylog Elasticsearch Version ${GRAYLOG_ELASTICSEARCH_VERSION}"
+    "${JAVA_HOME}/bin/java" \
+      ${GRAYLOG_SERVER_JAVA_OPTS} \
+      -jar \
+      -Dlog4j.configurationFile=${GRAYLOG_HOME}/config/log4j2.xml \
+      -Djava.library.path=${GRAYLOG_HOME}/lib/sigar/ \
+      -Dgraylog2.installation_source=docker \
+      ${GRAYLOG_HOME}/graylog.jar \
+      server \
+      -f ${GRAYLOG_HOME}/graylog.conf.subst
+---
+# Source: graylog-helm-chart/charts/graylog/templates/role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: graylog
+  labels:
+    app.kubernetes.io/name: graylog
+    helm.sh/chart: graylog-2.1.1
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/instance: "graylog"
+    app.kubernetes.io/version: "4.2.7"
+rules:
+- apiGroups:
+    - ""
+  resources:
+    - pods
+    - secrets
+  verbs:
+    - get
+    - list
+    - patch
+---
+# Source: graylog-helm-chart/charts/graylog/templates/rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: graylog
+  labels:
+    helm.sh/chart: graylog-2.1.1
+    app.kubernetes.io/name: graylog
+    app.kubernetes.io/instance: "graylog"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/version: "4.2.7"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: graylog
+subjects:
+- kind: ServiceAccount
+  name: graylog
+---
+# Source: graylog-helm-chart/charts/graylog/charts/elasticsearch/templates/service.yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: elasticsearch-master
+  labels:
+    heritage: "Helm"
+    release: "graylog"
+    chart: "elasticsearch"
+    app: "elasticsearch-master"
+  annotations:
+    {}
+spec:
+  type: ClusterIP
+  selector:
+    release: "graylog"
+    chart: "elasticsearch"
+    app: "elasticsearch-master"
+  ports:
+  - name: http
+    protocol: TCP
+    port: 9200
+  - name: transport
+    protocol: TCP
+    port: 9300
+---
+# Source: graylog-helm-chart/charts/graylog/charts/elasticsearch/templates/service.yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: elasticsearch-master-headless
+  labels:
+    heritage: "Helm"
+    release: "graylog"
+    chart: "elasticsearch"
+    app: "elasticsearch-master"
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  clusterIP: None # This is needed for statefulset hostnames like elasticsearch-0 to resolve
+  # Create endpoints also if the related pod isn't ready
+  publishNotReadyAddresses: true
+  selector:
+    app: "elasticsearch-master"
+  ports:
+  - name: http
+    port: 9200
+  - name: transport
+    port: 9300
+---
+# Source: graylog-helm-chart/charts/graylog/charts/mongodb/templates/arbiter/headless-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: graylog-mongodb-arbiter-headless
+  namespace: test
+  labels:
+    app.kubernetes.io/name: mongodb
+    helm.sh/chart: mongodb-10.31.2
+    app.kubernetes.io/instance: graylog
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: arbiter
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - name: tcp-mongodb
+      port: 27017
+      targetPort: mongodb
+  selector:
+    app.kubernetes.io/name: mongodb
+    app.kubernetes.io/instance: graylog
+    app.kubernetes.io/component: arbiter
+---
+# Source: graylog-helm-chart/charts/graylog/charts/mongodb/templates/replicaset/headless-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: graylog-mongodb-headless
+  namespace: test
+  labels:
+    app.kubernetes.io/name: mongodb
+    helm.sh/chart: mongodb-10.31.2
+    app.kubernetes.io/instance: graylog
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: mongodb
+spec:
+  type: ClusterIP
+  clusterIP: None
+  publishNotReadyAddresses: true
+  ports:
+    - name: mongodb
+      port: 27017
+      targetPort: mongodb
+  selector:
+    app.kubernetes.io/name: mongodb
+    app.kubernetes.io/instance: graylog
+    app.kubernetes.io/component: mongodb
+---
+# Source: graylog-helm-chart/charts/graylog/templates/headless-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: graylog
+  labels:
+    helm.sh/chart: graylog-2.1.1
+    app.kubernetes.io/name: graylog
+    app.kubernetes.io/instance: "graylog"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/version: "4.2.7"
+  annotations:
+    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
+spec:
+  ports:
+    - name: graylog
+      port: 9000
+  type: ClusterIP
+  clusterIP: None
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/name: graylog
+    app.kubernetes.io/instance: "graylog"
+---
+# Source: graylog-helm-chart/charts/graylog/templates/master-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: graylog-master
+  labels:
+    helm.sh/chart: graylog-2.1.1
+    app.kubernetes.io/name: graylog
+    app.kubernetes.io/instance: "graylog"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/version: "4.2.7"
+    graylog-role: "master"
+spec:
+  ports:
+    - name: graylog
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
+  selector:
+    app.kubernetes.io/name: graylog
+    app.kubernetes.io/instance: "graylog"
+    graylog-role: "master"
+  type: "NodePort"
+---
+# Source: graylog-helm-chart/charts/graylog/templates/tcp-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: graylog-tcp
+  labels:
+    helm.sh/chart: graylog-2.1.1
+    app.kubernetes.io/name: graylog
+    app.kubernetes.io/instance: "graylog"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/version: "4.2.7"
+    app.kubernetes.io/component: "TCP"
+spec:
+  ports:
+    - name: syslog
+      port: 1514
+      protocol: TCP
+      targetPort: 1514
+      nodePort:  30014  
+  selector:
+    app.kubernetes.io/name: graylog
+    app.kubernetes.io/instance: "graylog"
+  type: "NodePort"
+---
+# Source: graylog-helm-chart/charts/graylog/templates/web-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: graylog-web
+  labels:
+    helm.sh/chart: graylog-2.1.1
+    app.kubernetes.io/name: graylog
+    app.kubernetes.io/instance: "graylog"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/version: "4.2.7"
+    app.kubernetes.io/component: "web"
+spec:
+  ports:
+    - name: graylog
+      port: 9000
+      protocol: TCP
+      targetPort: 9000
+      nodePort:  30012
+  selector:
+    app.kubernetes.io/name: graylog
+    app.kubernetes.io/instance: "graylog"
+  type: "NodePort"
+---
+# Source: graylog-helm-chart/charts/graylog/charts/elasticsearch/templates/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: elasticsearch-master
+  labels:
+    heritage: "Helm"
+    release: "graylog"
+    chart: "elasticsearch"
+    app: "elasticsearch-master"
+  annotations:
+    esMajorVersion: "7"
+spec:
+  serviceName: elasticsearch-master-headless
+  selector:
+    matchLabels:
+      app: "elasticsearch-master"
+  replicas: 1
+  podManagementPolicy: Parallel
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - metadata:
+      name: elasticsearch-master
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 8Gi
+  template:
+    metadata:
+      name: "elasticsearch-master"
+      labels:
+        release: "graylog"
+        chart: "elasticsearch"
+        app: "elasticsearch-master"
+      annotations:
+        
+    spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+      automountServiceAccountToken: true
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - "elasticsearch-master"
+      terminationGracePeriodSeconds: 120
+      volumes:
+      enableServiceLinks: true
+      initContainers:
+      - name: configure-sysctl
+        securityContext:
+          runAsUser: 0
+          privileged: true
+        image: "docker.elastic.co/elasticsearch/elasticsearch:7.16.2"
+        imagePullPolicy: "IfNotPresent"
+        command: ["sysctl", "-w", "vm.max_map_count=262144"]
+        resources:
+          {}
+
+      containers:
+      - name: "elasticsearch"
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          runAsNonRoot: true
+          runAsUser: 1000
+        image: "docker.elastic.co/elasticsearch/elasticsearch:7.16.2"
+        imagePullPolicy: "IfNotPresent"
+        readinessProbe:
+          exec:
+            command:
+              - bash
+              - -c
+              - |
+                set -e
+                # If the node is starting up wait for the cluster to be ready (request params: "wait_for_status=green&timeout=1s" )
+                # Once it has started only check that the node itself is responding
+                START_FILE=/tmp/.es_start_file
+
+                # Disable nss cache to avoid filling dentry cache when calling curl
+                # This is required with Elasticsearch Docker using nss < 3.52
+                export NSS_SDB_USE_CACHE=no
+
+                http () {
+                  local path="${1}"
+                  local args="${2}"
+                  set -- -XGET -s
+
+                  if [ "$args" != "" ]; then
+                    set -- "$@" $args
+                  fi
+
+                  if [ -n "${ELASTIC_PASSWORD}" ]; then
+                    set -- "$@" -u "elastic:${ELASTIC_PASSWORD}"
+                  fi
+
+                  curl --output /dev/null -k "$@" "http://127.0.0.1:9200${path}"
+                }
+
+                if [ -f "${START_FILE}" ]; then
+                  echo 'Elasticsearch is already running, lets check the node is healthy'
+                  HTTP_CODE=$(http "/" "-w %{http_code}")
+                  RC=$?
+                  if [[ ${RC} -ne 0 ]]; then
+                    echo "curl --output /dev/null -k -XGET -s -w '%{http_code}' \${BASIC_AUTH} http://127.0.0.1:9200/ failed with RC ${RC}"
+                    exit ${RC}
+                  fi
+                  # ready if HTTP code 200, 503 is tolerable if ES version is 6.x
+                  if [[ ${HTTP_CODE} == "200" ]]; then
+                    exit 0
+                  elif [[ ${HTTP_CODE} == "503" && "7" == "6" ]]; then
+                    exit 0
+                  else
+                    echo "curl --output /dev/null -k -XGET -s -w '%{http_code}' \${BASIC_AUTH} http://127.0.0.1:9200/ failed with HTTP code ${HTTP_CODE}"
+                    exit 1
+                  fi
+
+                else
+                  echo 'Waiting for elasticsearch cluster to become ready (request params: "wait_for_status=green&timeout=1s" )'
+                  if http "/_cluster/health?wait_for_status=green&timeout=1s" "--fail" ; then
+                    touch ${START_FILE}
+                    exit 0
+                  else
+                    echo 'Cluster is not yet ready (request params: "wait_for_status=green&timeout=1s" )'
+                    exit 1
+                  fi
+                fi
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 3
+          timeoutSeconds: 5
+        ports:
+        - name: http
+          containerPort: 9200
+        - name: transport
+          containerPort: 9300
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512M
+          requests:
+            cpu: 100m
+            memory: 512M
+        env:
+          - name: node.name
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: cluster.initial_master_nodes
+            value: "elasticsearch-master-0,"
+          - name: discovery.seed_hosts
+            value: "elasticsearch-master-headless"
+          - name: cluster.name
+            value: "elasticsearch"
+          - name: network.host
+            value: "0.0.0.0"
+          - name: cluster.deprecation_indexing.enabled
+            value: "false"
+          - name: ES_JAVA_OPTS
+            value: "-Xmx128m -Xms128m"
+          - name: node.data
+            value: "true"
+          - name: node.ingest
+            value: "true"
+          - name: node.master
+            value: "true"
+          - name: node.ml
+            value: "true"
+          - name: node.remote_cluster_client
+            value: "true"
+        volumeMounts:
+          - name: "elasticsearch-master"
+            mountPath: /usr/share/elasticsearch/data
+---
+# Source: graylog-helm-chart/charts/graylog/charts/mongodb/templates/arbiter/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: graylog-mongodb-arbiter
+  namespace: test
+  labels:
+    app.kubernetes.io/name: mongodb
+    helm.sh/chart: mongodb-10.31.2
+    app.kubernetes.io/instance: graylog
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: arbiter
+spec:
+  serviceName: graylog-mongodb-arbiter-headless
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mongodb
+      app.kubernetes.io/instance: graylog
+      app.kubernetes.io/component: arbiter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mongodb
+        helm.sh/chart: mongodb-10.31.2
+        app.kubernetes.io/instance: graylog
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/component: arbiter
+    spec:
+      
+      serviceAccountName: graylog-mongodb
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: mongodb
+                    app.kubernetes.io/instance: graylog
+                    app.kubernetes.io/component: arbiter
+                namespaces:
+                  - "test"
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+        sysctls: []
+      initContainers:
+      containers:
+        - name: mongodb-arbiter
+          image: docker.io/bitnami/mongodb:4.4.11-debian-10-r7
+          imagePullPolicy: "IfNotPresent"
+          securityContext:
+            runAsUser: 1001
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MY_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: K8S_SERVICE_NAME
+              value: "graylog-mongodb-arbiter-headless"
+            - name: MONGODB_REPLICA_SET_MODE
+              value: "arbiter"
+            - name: MONGODB_INITIAL_PRIMARY_HOST
+              value: "graylog-mongodb-0.graylog-mongodb-headless.$(MY_POD_NAMESPACE).svc.cluster.local"
+            - name: MONGODB_REPLICA_SET_NAME
+              value: "rs0"
+            - name: MONGODB_ADVERTISED_HOSTNAME
+              value: "$(MY_POD_NAME).$(K8S_SERVICE_NAME).$(MY_POD_NAMESPACE).svc.cluster.local"
+            - name: ALLOW_EMPTY_PASSWORD
+              value: "yes"
+          ports:
+            - containerPort: 27017
+              name: mongodb
+          livenessProbe:
+            tcpSocket:
+              port: mongodb
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 6
+          readinessProbe:
+            tcpSocket:
+              port: mongodb
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 6
+          resources:
+            limits: {}
+            requests: {}
+---
+# Source: graylog-helm-chart/charts/graylog/charts/mongodb/templates/replicaset/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: graylog-mongodb
+  namespace: test
+  labels:
+    app.kubernetes.io/name: mongodb
+    helm.sh/chart: mongodb-10.31.2
+    app.kubernetes.io/instance: graylog
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: mongodb
+spec:
+  serviceName: graylog-mongodb-headless
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mongodb
+      app.kubernetes.io/instance: graylog
+      app.kubernetes.io/component: mongodb
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mongodb
+        helm.sh/chart: mongodb-10.31.2
+        app.kubernetes.io/instance: graylog
+        app.kubernetes.io/managed-by: Helm
+        app.kubernetes.io/component: mongodb
+    spec:
+      
+      serviceAccountName: graylog-mongodb
+      affinity:
+        podAffinity:
+          
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/name: mongodb
+                    app.kubernetes.io/instance: graylog
+                    app.kubernetes.io/component: mongodb
+                namespaces:
+                  - "test"
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        nodeAffinity:
+          
+      securityContext:
+        fsGroup: 1001
+        sysctls: []
+      containers:
+        - name: mongodb
+          image: docker.io/bitnami/mongodb:4.4.11-debian-10-r7
+          imagePullPolicy: "IfNotPresent"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1001
+          command:
+            - /scripts/setup.sh
+          env:
+            - name: BITNAMI_DEBUG
+              value: "false"
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MY_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: MY_POD_HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: K8S_SERVICE_NAME
+              value: "graylog-mongodb-headless"
+            - name: MONGODB_INITIAL_PRIMARY_HOST
+              value: "graylog-mongodb-0.$(K8S_SERVICE_NAME).$(MY_POD_NAMESPACE).svc.cluster.local"
+            - name: MONGODB_REPLICA_SET_NAME
+              value: "rs0"
+            - name: MONGODB_ADVERTISED_HOSTNAME
+              value: "$(MY_POD_NAME).$(K8S_SERVICE_NAME).$(MY_POD_NAMESPACE).svc.cluster.local"
+            - name: ALLOW_EMPTY_PASSWORD
+              value: "yes"
+            - name: MONGODB_SYSTEM_LOG_VERBOSITY
+              value: "0"
+            - name: MONGODB_DISABLE_SYSTEM_LOG
+              value: "no"
+            - name: MONGODB_DISABLE_JAVASCRIPT
+              value: "no"
+            - name: MONGODB_ENABLE_JOURNAL
+              value: "yes"
+            - name: MONGODB_ENABLE_IPV6
+              value: "no"
+            - name: MONGODB_ENABLE_DIRECTORY_PER_DB
+              value: "no"
+          ports:
+            - containerPort: 27017
+              name: mongodb
+          livenessProbe:
+            exec:
+              command:
+                - mongo
+                - --disableImplicitSessions
+                - --eval
+                - "db.adminCommand('ping')"
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 6
+          readinessProbe:
+            exec:
+              command:
+                - bash
+                - -ec
+                - |
+                  # Run the proper check depending on the version
+                  [[ $(mongo --version | grep "MongoDB shell") =~ ([0-9]+\.[0-9]+\.[0-9]+) ]] && VERSION=${BASH_REMATCH[1]}
+                  . /opt/bitnami/scripts/libversion.sh
+                  VERSION_MAJOR="$(get_sematic_version "$VERSION" 1)"
+                  VERSION_MINOR="$(get_sematic_version "$VERSION" 2)"
+                  VERSION_PATCH="$(get_sematic_version "$VERSION" 3)"
+                  if [[ "$VERSION_MAJOR" -ge 4 ]] && [[ "$VERSION_MINOR" -ge 4 ]] && [[ "$VERSION_PATCH" -ge 2 ]]; then
+                      mongo --disableImplicitSessions $TLS_OPTIONS --eval 'db.hello().isWritablePrimary || db.hello().secondary' | grep -q 'true'
+                  else
+                      mongo --disableImplicitSessions $TLS_OPTIONS --eval 'db.isMaster().ismaster || db.isMaster().secondary' | grep -q 'true'
+                  fi
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 6
+          resources:
+            limits: {}
+            requests: {}
+          volumeMounts:
+            - name: datadir
+              mountPath: /bitnami/mongodb
+              subPath: 
+            - name: scripts
+              mountPath: /scripts/setup.sh
+              subPath: setup.sh
+            
+      volumes:
+        - name: scripts
+          configMap:
+            name: graylog-mongodb-scripts
+            defaultMode: 0755
+  volumeClaimTemplates:
+    - metadata:
+        name: datadir
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: "8Gi"
+---
+# Source: graylog-helm-chart/charts/graylog/templates/statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: graylog
+  labels:
+    helm.sh/chart: graylog-2.1.1
+    app.kubernetes.io/name: graylog
+    app.kubernetes.io/instance: "graylog"
+    app.kubernetes.io/managed-by: "Helm"
+    app.kubernetes.io/version: "4.2.7"
+spec:
+  serviceName: graylog
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: graylog
+      app.kubernetes.io/instance: "graylog"
+      app.kubernetes.io/managed-by: "Helm"
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: graylog-2.1.1
+        app.kubernetes.io/name: graylog
+        app.kubernetes.io/instance: "graylog"
+        app.kubernetes.io/managed-by: "Helm"
+        app.kubernetes.io/version: "4.2.7"
+      annotations:
+    spec:
+      serviceAccountName: graylog
+
+      securityContext:
+        {}
+      initContainers:
+        - name: "setup"
+          image: alpine
+          imagePullPolicy: IfNotPresent
+          # Graylog journal will recursive in every subdirectories. Any invalid format directories will cause errors
+          command:
+            - /bin/sh
+            - -c
+            - |
+              rm -rf /usr/share/graylog/data/journal/lost+found
+              wget https://storage.googleapis.com/kubernetes-release/release/v1.21.4/bin/linux/amd64/kubectl -O /k8s/kubectl
+              chmod +x /k8s/kubectl
+
+              GRAYLOG_HOME=/usr/share/graylog
+              chown -R 1100:1100 ${GRAYLOG_HOME}/data/
+          env:
+          volumeMounts:
+            - name: journal
+              mountPath: /usr/share/graylog/data/journal
+            - name: kubectl
+              mountPath: /k8s
+      containers:
+        - name: graylog-server
+          image: "graylog/graylog:4.2.5"
+          imagePullPolicy: "IfNotPresent"
+          command:
+            - /entrypoint.sh
+          env:
+            - name: GRAYLOG_SERVER_JAVA_OPTS
+              value: "-Dlog4j2.formatMsgNoLookups=true -Djdk.tls.acknowledgeCloseNotify=true -XX:+UnlockExperimentalVMOptions -XX:NewRatio=1 -XX:MaxMetaspaceSize=256m -server -XX:+ResizeTLAB -XX:-OmitStackTraceInFastThrow -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+            - name: GRAYLOG_PASSWORD_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: root-secret
+                  key: graylog-password-secret
+            - name: GRAYLOG_ROOT_PASSWORD_SHA2
+              valueFrom:
+                secretKeyRef:
+                  name: root-secret
+                  key: graylog-password-sha2
+            - name: GRAYLOG_ELASTICSEARCH_HOSTS
+              valueFrom:
+                secretKeyRef:
+                  name: graylog-elastic-secret
+                  key: uri
+            - name: GRAYLOG_MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: graylog-mongo-secret
+                  key: uri
+          securityContext:
+            privileged: false
+          ports:
+            - containerPort: 9000
+              name: graylog
+            - containerPort: 1514
+              name: syslog
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+            requests:
+              cpu: 500m
+              memory: 1024Mi
+          startupProbe:
+            httpGet:
+              path: /api/system/lbstatus
+              port: 9000
+            periodSeconds: 60
+            failureThreshold: 3
+            successThreshold: 1
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /api/system/lbstatus
+              port: 9000
+            initialDelaySeconds: 0
+            periodSeconds: 30
+            failureThreshold: 3
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /api/system/lbstatus
+              port: 9000
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            failureThreshold: 3
+            successThreshold: 1
+            timeoutSeconds: 5
+          volumeMounts:
+            - name: journal
+              mountPath: /usr/share/graylog/data/journal
+            - name: config
+              mountPath: /usr/share/graylog/config
+            - name: entrypoint
+              mountPath: /entrypoint.sh
+              subPath: entrypoint.sh
+            - name: kubectl
+              mountPath: /k8s
+          
+      terminationGracePeriodSeconds: 120
+      volumes:
+        - name: config
+          configMap:
+            name: graylog
+            items:
+              - key: graylog.conf
+                path: graylog.conf
+                mode: 292 # 0444
+              - key: log4j2.xml
+                path: log4j2.xml
+                mode: 292 # 0444
+        - name: entrypoint
+          configMap:
+            name: graylog
+            items:
+              - key: entrypoint.sh
+                path: entrypoint.sh
+                mode: 365 # 0555
+        - name: kubectl
+          emptyDir: {}
+  volumeClaimTemplates:
+    - metadata:
+        name: journal
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        storageClassName: "openebs-hostpath"
+        resources:
+          requests:
+            storage: "20Gi"
+
