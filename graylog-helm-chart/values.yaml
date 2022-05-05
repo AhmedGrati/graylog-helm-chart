@@ -15,14 +15,14 @@ graylog:
         service:
           type: NodePort
         ports:
-          - name: syslog
+          - name: syslog-udp
             port: 1514
             nodePort: 30007
       tcp:
         service:
           type: NodePort
         ports:
-          - name: syslog
+          - name: syslog-tcp
             port: 1514
             nodePort: 30006
     rootUsername: "Admin"
